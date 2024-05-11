@@ -1,0 +1,16 @@
+type Query {
+# * Playlist!: リスト内の各要素は Playlist 型であり、 null を許容しません。
+# * [Playlist!]!: このリスト自体も null を許容しません。
+  "Playlists hand-picked to be featured to all users."
+  featuredPlaylists: [Playlist!]!
+}
+
+"A curated collection of tracks designed for a specific activity or mood."
+type Playlist {
+  "The ID for the playlist."
+  id: ID!
+  "The name of the playlist."
+  name: String!
+  "Describes the playlist, what to expect and entices the user to listen."
+  description: String
+}
