@@ -16,3 +16,7 @@ Let's navigate to the src directory. In there, we're going to create a new file 
 GraphQL APIを構築する際、RESTからデータを取得するのは非常に一般的な作業であるため、Apollo Serverはそのための専用のDataSourceクラス、RESTDataSourceを提供しています。
 `npm install @apollo/datasource-rest`
 
+# 8 codegen
+`npm install -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-resolvers`
+
+`npm run generate`
