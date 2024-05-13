@@ -20,3 +20,30 @@ GraphQL APIを構築する際、RESTからデータを取得するのは非常�
 `npm install -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-resolvers`
 
 `npm run generate`
+
+# 9 QUERYING REAL DATA
+contextType に型を定義する
+`npm run generate`
+
+# 10 QUERY ARGUMENTS
+> スキーマの新しいプレイリストフィールドを考慮するために生成された型を更新する必要がありますが、スキーマが変更されるたびに自動的に型を再生成するようにプロジェクトを更新しましょう。
+> package.jsonに飛びます。devスクリプトとgenerateスクリプトを微調整します。
+
+`"dev": "concurrently \"ts-node-dev --respawn --watch ./**/*.graphql ./src/index.ts\" \"npm run generate --watch\"",`
+
+> このアップデートにより、2つのスクリプトを同時に実行できるようになった。1つ目は、以前使用したts-node-devだ。このコマンドは、プロジェクトに変更が加えられるたびに、index.tsからアプリを再起動する。2つ目のスクリプトはnpm run generateで、--watchフラグを付けて実行する。
+
+> 次に、generateスクリプトを更新しよう。
+
+> package.json
+
+`"generate"： "graphql-codegen --watch \"src/schema.graphql""`
+> この追加により、GraphQL Code Generatorにsrc/schema.graphqlファイルを監視するよう明示的に指示し、codegenプロセスを再実行することができる。その結果、プロジェクトが変更されるたびに、スキーマが変更されるたびに更新されたtypes.tsファイルとともに、これまでと同じホットリロードを得ることができる！
+
+watcherをインストール
+`npm install @parcel/watcher`
+
+> さっそく試してみよう。以下のコマンドでサーバーを再起動してください：
+
+`npm run dev`
+

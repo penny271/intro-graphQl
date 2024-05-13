@@ -1,8 +1,12 @@
+# src/schema.graphql
 type Query {
 # * Playlist!: リスト内の各要素は Playlist 型であり、 null を許容しません。
 # * [Playlist!]!: このリスト自体も null を許容しません。
   "Playlists hand-picked to be featured to all users."
+  # ^ 下記は クエリのフィールド
+  # - Query タイプに定義されたフィールドがエントリーポイントです。
   featuredPlaylists: [Playlist!]!
+  playlist(id: ID!): Playlist
 }
 
 "A curated collection of tracks designed for a specific activity or mood."
@@ -13,4 +17,20 @@ type Playlist {
   name: String!
   "Describes the playlist, what to expect and entices the user to listen."
   description: String
+  "The tracks of the playlist."
+  tracks: [Track!]!
+}
+
+"A single audio file, usually a song."
+type Track {
+  "The ID for the track."
+  id: ID!
+  "The name of the track"
+  name: String!
+  "The track length in milliseconds."
+  durationMs: Int!
+  "Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown)"
+  explicit: Boolean!
+  "The URI for the track, usually a Spotify link."
+  uri: String!
 }
