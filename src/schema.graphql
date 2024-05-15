@@ -17,7 +17,7 @@ type Playlist {
   name: String!
   "Describes the playlist, what to expect and entices the user to listen."
   description: String
-  "The tracks of the playlist."
+  "The tracks of the playlist. "
   tracks: [Track!]!
 }
 
@@ -27,7 +27,7 @@ type Track {
   id: ID!
   "The name of the track"
   name: String!
-  "The track length in milliseconds."
+  "The track length in milliseconds. REST APIから返ってくるフィールド名はduration_msですが、ここではdurationMsという名前に変更しています。、そのためにresolvers.tsでタイプリゾルバを設定し、duration_msフィールドをdurationMsに変更している。"
   durationMs: Int!
   "Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown)"
   explicit: Boolean!

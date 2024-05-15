@@ -1,0 +1,47 @@
+  // * タイプリゾルバ (Type Resolver) は、特定の型に関連付けられたフィールドを解決するために使用されます。
+  // Playlist: {
+  //   tracks: (parent, args, contextValue, info) => {
+  //     // throw new Error('Resolver not implemented');
+  //     console.log('==========parent=========');
+  //     console.log(parent);
+  //     console.log('========== info =========');
+  //     console.log(info);
+  //     return null;
+  //     // todo
+  //   },
+  // },
+
+
+{
+  collaborative: false,
+  description: 'Infuse flavor into your kitchen. This playlist merges zesty tunes with culinary vibes, creating a harmonious background for your cooking escapades. Feel the synergy between music and the zest of your creations.',
+  external_urls: {
+    spotify: 'https://open.spotify.com/playlist/6LB6g7S5nc1uVVfj00Kh6Z'
+  },
+  followers: { href: null, total: 0 },
+  href: 'https://api.spotify.com/v1/playlists/6LB6g7S5nc1uVVfj00Kh6Z',
+  id: '6LB6g7S5nc1uVVfj00Kh6Z',
+  images: [ [Object] ],
+  name: 'Zesty Culinary Harmony',
+  owner: {
+    display_name: 'Odyssey Learner',
+    external_urls: [Object],
+    href: 'https://api.spotify.com/v1/users/31ec74sabsbxkw7oiwnoalq2r6bm',
+    id: '31ec74sabsbxkw7oiwnoalq2r6bm',
+    type: 'user',
+    uri: 'spotify:user:31ec74sabsbxkw7oiwnoalq2r6bm'
+  },
+  public: true,
+  snapshot_id: 'NiwwM2VmYjg0ZGY2OGIzZmZmM2FlNzMwYzQzMzhhY2FiNWM2NmJkYzBj',
+  tracks: {
+    href: 'https://api.spotify.com/v1/playlists/6LB6g7S5nc1uVVfj00Kh6Z/tracks?offset=0&limit=100&locale=en-US,en;q=0.9',
+    items: [Array],
+    limit: 100,
+    next: null,
+    offset: 0,
+    previous: null,
+    total: 3
+  },
+  type: 'playlist',
+  uri: 'spotify:playlist:6LB6g7S5nc1uVVfj00Kh6Z'
+}
