@@ -5,7 +5,7 @@ import { RESTDataSource } from '@apollo/datasource-rest';
 // import { Track } from '../types';
 
 // ! REST APIレスポンスの形状を正確に記述した型をインポート
-import { PlaylistModel, TrackModel } from '../models';
+import { PlaylistModel, TrackModel, SnapshotOrError } from '../models';
 
 export class SpotifyAPI extends RESTDataSource {
   baseURL = 'https://spotify-demo-api-fe224840a08c.herokuapp.com/v1/';
@@ -30,5 +30,16 @@ export class SpotifyAPI extends RESTDataSource {
     // const response = await this.get<{ items: { track: Track }[] }>(`playlists/${playlistId}/tracks`);
     const response = await this.get<{ items: { track: TrackModel }[] }>(`playlists/${playlistId}/tracks`);
     return response?.items?.map(({ track }) => track) ?? [];
+  }
+
+  // mutation関係
+  // * SnapshotOrErrorの型定義をmodels.tsで行い、schema.graphqlで定義しない理由は、SnapshotOrErrorがGraphQLスキーマで直接使用されるものではなく、内部的にREST APIからのレスポンスを処理するために使われるからです。
+  addItemsToPlaylist(input: { playlistId: string; uris: string[] }): Promise<SnapshotOrError> {
+    const { playlistId, uris } = input;
+    return this.post(`playlists/${playlistId}/tracks`, {
+      params: {
+        uris: uris.join(','), // プレイリストに追加するトラックのURIをカンマ区切りの文字列に変換
+      },
+    });
   }
 }

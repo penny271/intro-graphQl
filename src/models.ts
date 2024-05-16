@@ -29,3 +29,10 @@ export type TrackModel = {
   explicit: boolean;
   uri: string;
 };
+
+// mutation関係の型定義
+// * SnapshotOrErrorの型定義をmodels.tsで行い、schema.graphqlで定義しない理由は、SnapshotOrErrorがGraphQLスキーマで直接使用されるものではなく、内部的にREST APIからのレスポンスを処理するために使われるからです。
+export type SnapshotOrError = {
+  snapshot_id?: string;
+  error?: string;
+};
