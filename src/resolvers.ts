@@ -44,17 +44,21 @@ export const resolvers: Resolvers = {
 
   Mutation: {
     // addItemsToPlaylist: (parent, args, contextValue, info) => {
-    addItemsToPlaylist: async (_, { input }, { dataSources }) => {
+    addItemsToPlaylist: async (parent, { input }, { dataSources }) => {
+      // addItemsToPlaylist: async (_, { input }, { dataSources }) => {
       try {
         const response = await dataSources.spotifyAPI.addItemsToPlaylist(input);
         console.log('response:::', response);
+        // console.log('parent ::: undefined', parent);
+        // [0] response::: { snapshot_id: '6LB6g7S5nc1uVVfj00Kh6Z' }
         if (response.snapshot_id) {
           // everything succeeds with the mutation
           return {
             code: 200,
             success: true,
-            message: 'Tracks added to playlist!',
-            playlist: null, // We don't have this value yet
+            message: 'Tracks added to playlist!!',
+            // playlist: null,
+            playlistId: response.snapshot_id,
           };
         } else {
           throw Error('snapshot_id property not found');
@@ -65,9 +69,20 @@ export const resolvers: Resolvers = {
           code: 500,
           success: false,
           message: `Something went wrong: ${err}`,
-          playlist: null,
+          // playlist: null,
+          playlistId: null,
         };
       }
+    },
+  },
+
+  // * この関数を定義することで、Mutation.addItemsToPlaylistリゾルバが、それが返すAddItemsToPlaylistPayloadオブジェクト上のプレイリストフィールドを解決する責任はもはやないことをサーバに伝えている
+  AddItemsToPlaylistPayload: {
+    // playlist: (parent, args, contextValue, info)
+    // * playlisの中のplaylistIdを使用する
+    playlist: ({ playlistId }, _, { dataSources }) => {
+      // console.log('parent:::', parent);
+      return dataSources.spotifyAPI.getPlaylist(playlistId);
     },
   },
 };
